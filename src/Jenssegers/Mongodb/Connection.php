@@ -175,7 +175,9 @@ class Connection extends BaseConnection
             $dsn_string = Str::replaceFirst('mongodb://', '', $dsn_string);
         }
 
-        $dsn_string = rawurlencode($dsn_string);
+        // remove rawurlencode because of bug with escaped chars and big/small 
+        // letter in DSN string after encode-decode
+        // $dsn_string = rawurlencode($dsn_string);
 
         return "mongodb://{$dsn_string}";
     }
